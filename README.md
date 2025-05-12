@@ -11,7 +11,7 @@ Supongamos que se tiene georeferenciada polígono de un proyecto. Sin embargo, p
 - Archivo que nos permita georeferenciar nuestro proyecto en Qgis. Se recoienda que sea en formato KMZ o shp (con sus archivos complementarios.)
 - Archivo que muestre y georeferencie las localidades que estan en el Área de Influenci del proyecto. Para el caso de México existe el [Marco Geoestadístico. Censo de Población y Vivienda 2020](https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=889463807469), publicado por INEGI. Dentro del conjuntos de datos de este marco, se encuentran las localiades existentes, tanto amanzanadas como rurales puntuales.
 -  Archivo que muestre la población de cada una de las localidades dentro del Área de Influencia. Para ello contamos con el Censo de Población y Vivienda 2020. Si bien se puede usar la base de datos de todo el censo, para mayor comodidad se puede usar el [Sistema de Consulta de Integración Territorial, Entorno Urbano y Localidad.(SCITEL)](https://www.inegi.org.mx/app/scitel/Default?ev=9). Este sistema permite consultar de manera interactiva y focalizada los principales resultados por localidad del censo. Sólo es cuestión de elegir la o las entidades federativas de nuestro interés.
--  
+
 ## Paqueterías a utilizar:
 - tidyverse
 - readr
