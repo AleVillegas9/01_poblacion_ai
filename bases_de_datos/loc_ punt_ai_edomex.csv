@@ -1,0 +1,11 @@
+CVEGEO,CVE_ENT,CVE_MUN,CVE_LOC,CVE_AGEB,CVE_MZA,NOMGEO,PLANO,Name,descriptio,timestamp,begin,end,altitudeMo,tessellate,extrude,visibility,drawOrder,icon,mrb_dist,Name_2,descript_1,timestamp_,begin_2,end_2,altitude_1,tessella_1,extrude_2,visibili_1,drawOrder_,icon_2
+"1502500521042800","15","025","0052","1042","800",Rancho Nuevo,Croquis,Área de Influencia Directa,,,,,,"1","0","-1",,,"1000",,,,,,,,,,,
+"1502500531042800","15","025","0053","1042","800",Rancho San Miguel,Si,Zona de Amortiguamiento,,,,,,"1","0","-1",,,"500",,,,,,,,,,,
+"1502500581042800","15","025","0058","1042","800",Rancho Nuevo San Miguel,Si,Área Núcleo,,,,,,,,,,,,Ciudad Juárez,,,,,,"1","0","-1",,
+"1502500691042800","15","025","0069","1042","800",Rancho San Jorge,Croquis,Área de Influencia Directa,,,,,,"1","0","-1",,,"1000",,,,,,,,,,,
+"1502501091042800","15","025","0109","1042","800",Santa Anita [Granja],Croquis,Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,
+"1502501211042800","15","025","0121","1042","800",Barrio de Guadalupe,Si,Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,
+"1502501231042800","15","025","0123","1042","800",Camino al Monte,Croquis,Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,
+"1512200031012800","15","122","0003","1012","800",Comalchica,Croquis,Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,
+"1512200051012800","15","122","0005","1012","800",Santa Cruz,Croquis,Área de Influencia Directa,,,,,,"1","0","-1",,,"1000",,,,,,,,,,,
+"1512200061012800","15","122","0006","1012","800",El Triángulo,Si,Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,

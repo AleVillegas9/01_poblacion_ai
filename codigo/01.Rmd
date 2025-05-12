@@ -1,0 +1,326 @@
+---
+title: "01. Uso de Qgis y R para conocer la población de una Área de Influencia "
+author: "Alejandro Villegas"
+date: "2025-05-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Problema a resolver.
+
+Supongamos que se tiene georeferenciada polígono de un proyecto. Sin embargo, para evaluar la viabilidad y el imapacto social de dicho proyecto se requiere conocer ¿cuál es el Área de Influencia de dicho proyecto? y ¿ A cuantas personas potencialmente afectaría nuestro proyecto?
+
+# Insumos
+
+Las herramientas que se utilizarán para este proyecto son:
+
+-   Qgis.
+-   R studio.
+
+Por otro lado, los datos que se requeridos son:
+
+-   Archivo que nos permita georeferenciar nuestro proyecto en Qgis. Se recoienda que sea en formato KMZ o shp (con sus archivos complementarios.)
+
+-   Archivo que muestre y georeferencie las localidades que estan en el Área de Influenci del proyecto. Para el caso de México existe el [Marco Geoestadístico. Censo de Población y Vivienda 2020](https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=889463807469), publicado por INEGI. Dentro del conjuntos de datos de este marco, se encuentran las localiades existentes, tanto amanzanadas como rurales puntuales.
+
+-   Archivo que muestre la población de cada una de las localidades dentro del Área de Influencia. Para ello contamos con el Censo de Población y Vivienda 2020. Si bien se puede usar la base de datos de todo el censo, para mayor comodidad se puede usar el [Sistema de Consulta de Integración Territorial, Entorno Urbano y Localidad.(SCITEL)](https://www.inegi.org.mx/app/scitel/Default?ev=9). Que permite consultar de maner interactiva y focalizada los principales resultados por localidad del censo. Sólo es cuestión de elegir la o las entidades federativas de nuestro interés.
+
+# Procedimiento
+
+## Paso 1: Generar el Área de Influencia.
+
+Suponiendo que ya se cuenta con un archivo KMZ o SHP, de nuestro proyecto se procede a cargar el archivo como una capa en Qgis. Para facilitar nuestro trabajo usareos el Quick Map Services de Google Satellite para obtener una capa que ayude a ubicar nuestro proyecto, Además, en caso de que estemos usando un archivo KMZ se transformará a un archivo SHP. A estas alturas nos debería quedar algo como lo siguiente:
+
+::: {style="text-align: center;"}
+<p style="font-size: smaller; font-style: italic;">
+
+Imagen 1: Área del Proyecto
+
+</p>
+
+<img src="images/01_proyecto-03.png" style="width:60%;"/>
+
+<p style="font-size: smaller; font-style: italic;">
+
+Fuente: Elaboración propia.
+
+</p>
+:::
+
+Después, generamos el Área de Influncia del proyecto (AI). Se puede presuponer un AI uniforme, pero en este caso se proyectará una AI con varios nieveles, los cuales abarcarán distintas distancias. Los niveles de la AI serán, Área Núcleo (el proyecto), Zona de Amortiguamiento (500 metros), Área de Influencia Directa (1000 metros), Área de Influencia Indirecta (2000 metros).
+
+Para generar la AI y sus niveles usamos la herramienta Multi Ring Buffer de Qgis en la capa de nuestro proyecto, utilizando los valores deseados.Sin embargo, la nueva capa no mostrará el Área Núcleo. Para obtener una capa que muestre todos los niveles de la AI, usaos la herramienta "Unión" para combinar la capa del proyecto, con la capa generada por el proceso de *buffer*.
+
+Para un mejor manejo y visualización, modificamos la tabla de atributos para nombrar cada una de los niveles de la AI. Finalmente, modificamos las etiquetas y colores de cada nivel. Nos debería quedar algo como lo siguiente:
+
+::: {style="text-align: center;"}
+<p style="font-size: smaller; font-style: italic;">
+
+Imagen 1: Área del Proyecto
+
+</p>
+
+<img src="images/02_ai-02.png" style="width:60%;"/>
+
+<p style="font-size: smaller; font-style: italic;">
+
+Fuente: Elaboración propia.
+
+</p>
+:::
+
+Notece que en el panel de capas, la capa resulante del buffer es temporal. Como ya cumplió su propósito, la eliminaremos. Además, en dicho panel, también se puede notar el nombre de cada una de las capas del AI.
+
+## Paso 2: Identificar las localidades dentro del AI.
+
+Para identificar las localides haremos uso del [Marco Geoestadístico. Censo de Población y Vivienda 2020](https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=889463807469), Como identificamos que el AI se encuentra tanto en la CDMX como en el Estado de México, usaremos los conjuntos de archivos correspondientes a ambas entidades.
+
+Cada conjunto de archivos nos ofrece una gran variedad de diferntes capas con diferentes características, pero para este proyecto sólo nos interesan la de localaidades amanzanadas y la de localidades rurales puntuales.
+
+Cada una de estas capas muestra las localidades de toda la entidad, sin embargo, solo nos interesan las localidades cuya totalidad o parte se ubique en el AI. Para filtrar las localidades de interés usmos la herramienta de intersección.
+
+Finalmente, unimos las capas de localidades amanzanadas en el AI y la de localidades puntuales rurales. Quedaría algo como lo siguiente:
+
+::: {style="text-align: center;"}
+<p style="font-size: smaller; font-style: italic;">
+
+Imagen 3: Localidades del AI
+
+</p>
+
+<img src="images/03_localidades.png" style="width:60%;"/>
+
+<p style="font-size: smaller; font-style: italic;">
+
+Fuente: Elaboración propia.
+
+</p>
+:::
+
+Si quieres, puedes utilizar las herramientas de composición para transformar esto en un mapa para integrarlo a algún reporte. El mapa seríal algo parecido a lo siguiente:
+
+::: {style="text-align: center;"}
+<p style="font-size: smaller; font-style: italic;">
+
+Imagen 3: Mapa de las localidades del AI
+
+</p>
+
+<img src="images/04_mapaloc.png" style="width:60%;"/>
+
+<p style="font-size: smaller; font-style: italic;">
+
+Fuente: Elaboración propia.
+
+</p>
+:::
+
+La herrmienta de composición de Qgis nos permite agregar muchos elementos a nuestros mapas, como rosas de los vientos, logotipos, escalas, etc. Sin embargo, por simplicidad omití esos detalles. También se pueden mostrar las etiquetas de las localidades, sin embargo, debido a que son muchas, los nombres se veían amontonados, como en este paso no es necesario mostrar los nombres, lo dejé así.
+
+## Paso 3: Limipiar las base de datos de las localidades.
+
+Cada un de las caapas de Qgis tiene asociada una tabla de atributos, que muestran diversos datos de interés de las geometrías contenidas en la capa, como por ejemplo los datos de identificación de las localidades que se encuentran dentro del AI. Así pues, descargaremos cada una de las tablas de atributos de las cuatro capas que contienen localidades, en formato csv (también puede ser en formato xlm).
+
+Cuando inspeccionamos las tablas nos damos cuenta de que contienen datos de interés sobre las localidades dentro del AI, sin embargo, no viene el dato que más nos interesa, el número depersonas que habitan en dichas localaidades. Para resolver esto, usaremos el [Sistema de Consulta de Integración Territorial, Entorno Urbano y Localidad.(SCITEL)](https://www.inegi.org.mx/app/scitel/Default?ev=9)
+donde bajaremos las bases correspontientes tanto para la CDMX y el Edo.Mex. Osea otras dos tablas. 
+
+Para este punto podríaamos armarnos de paciencia y buscar cada auna de las localidades del AI en las tablas que bajamos del SCITEL y ver su población total. Sin embargo, por  más pacientes que seaamos quizá no tengamos tanto tiempo. Por lo cual, podemos usar la tecnología para acelerar el proceso. 
+
+Como primer paso debemos pensar en qué necesitamos hacer, y los insumos que tenemos. En este caso, lo que queremos hacer es una tabla de todas las localidades del AI, y su población total. Estos datos están repartidos en seis tablas diferentes. Entonces, para lograr nuestro objetivo haréos dos pasos, primero unificaremos las tablas de las localidades resultantes de las capas de Qgis, asi como las dos tablas de localaidades recuperadas del SCITEL. Como segundo paso, aplicaremos un left_join() para filtrar todas locaalidades del AI que aparezcaan en la tabla unificada del SCITEL. Como resultado, obtendremos lo que buscamos. 
+
+Para lograr esto, primero tenemos que limpiar o preparar las bases de datos. Comenzamos cargando las librerias que usaremos
+
+```{r}
+library(tidyverse)
+library (readr)
+```
+### Unificación de las bases de las capas
+Después, cargamos las bases de datos resultantes de las capas. 
+
+```{r}
+loc_pun_cdmx <- read_csv("C:/Users/Dell/Desktop/port/neotablas/locapunt_ai_cdmx.csv")
+
+head(loc_pun_cdmx)
+
+loc_pun_edomex <- read_csv("C:/Users/Dell/Desktop/port/neotablas/loc_ punt_ai_edomex.csv")
+
+head(loc_pun_edomex)
+
+loc_aman_cdmx <- read_csv("C:/Users/Dell/Desktop/port/neotablas/loc_aman_ai_cdmx.csv")
+
+tail(loc_aman_cdmx)
+
+loc_aman_edomex <- read_csv("C:/Users/Dell/Desktop/port/neotablas/loc_aman_ai_edomex.csv")
+
+tail (loc_aman_edomex)
+```
+
+Observamos que las tablas tienen demasiadas variables, por lo cual, solo nos quedamos con las variables relacionadas con la identificación de las localidades, a saber clave geográfica (CVEGEO), clave de la entidad (CVE_ENT), clave del municipio(CVE_MUN), clave de la localidad (CVE_LOC) y nombre de la localidad (NOMGEO.
+
+```{r}
+loc_aman_cdmx <- loc_aman_cdmx [,24:28]
+loc_aman_edomex <- loc_aman_edomex [, 24:28]
+loc_pun_cdmx <-  loc_pun_cdmx [, 1:7]
+loc_pun_edomex <- loc_pun_edomex [, 1:7]
+```
+
+De esta manera las bases quedarían algo como lo siguiente:
+```{r}
+head (loc_aman_cdmx)
+```
+
+
+Como las columnas las columnas CVE_AGEB y CVE_MZA de las bases de las localidades puntuales estorban, las quitamos.
+
+```{r}
+loc_pun_cdmx <-  loc_pun_cdmx [, -6]
+loc_pun_edomex <- loc_pun_edomex [,-6]
+loc_pun_cdmx <-  loc_pun_cdmx [, -5]
+loc_pun_edomex <- loc_pun_edomex [,-5]
+```
+
+
+Como felizmente, las columnas y su orden concuerdan, pegammos las cuatro bases de datos.También quitamos la columna de CVEGEO, pues no aporta mucho para este proyecto. 
+
+```{r}
+localidades_ai <- rbind(loc_pun_edomex,loc_pun_edomex,loc_aman_cdmx,loc_aman_edomex)
+
+localidades_ai <- localidades_ai[, -1]
+
+tail(localidades_ai)
+```
+Todo parece bien, aunque si inspeccionaamos la base nos daremos cuenta de que hay muchas obseraciones que se repiten. Entonces quitamos los repetidos. Lo cual, nos deja con 23 observaciones, o localidades dentro del AI. 
+
+```{r}
+localidades_ai <-unique(localidades_ai)
+
+localidades_ai
+```
+
+### Unificación de las bases del SCITEL. 
+
+Ahora solo falta  unir las bases del SCITEL donde tenemos la información sobre la población de las localidades de la CDMX y el Edo.Mex.
+
+```{r}
+scitel_cdmx <- read_csv("C:/Users/Dell/Desktop/port/neotablas/ITER_09CSV20.csv")
+scitel_edomex <- read_csv("C:/Users/Dell/Desktop/port/neotablas/ITER_15CSV20.csv")
+```
+Vemos que son muchas observaciones, pero también muchas variables. Así que limpiaos la base para solo quedarnos con las variables que nos interesan, a saber las variales equivalentes a las que tenemos en la  base unificada de las localidades de la AI + la variable donde viene la población.
+
+En este punto, notamos que hay otras variables que podrían interesarnos, como el la población de mujeres o por disintos grupos de edad. Si nos interesa, podeos conservar dichas variables. Por hora solo nos quedaremos con la de población total. 
+
+
+```{r}
+scitel_cdmx <- scitel_cdmx %>% 
+  select(ENTIDAD, MUN, LOC, NOM_LOC, LOC, POBTOT)
+
+scitel_edomex <- scitel_edomex %>% 
+  select(ENTIDAD, MUN, LOC, NOM_LOC, LOC, POBTOT)
+```
+
+Ambas bases lucirían de las siguiente forma
+
+```{r}
+head(scitel_cdmx)
+
+tail(scitel_edomex)
+```
+
+
+
+
+Finalmente, unimos ambas bases de datos del SCTIEL, de manera similar a los que hicimos con las bases de las localiades del AI.
+
+```{r}
+localidades_scitel <- rbind(scitel_cdmx, scitel_edomex)
+
+head (localidades_scitel)
+```
+## Paso 4: Unimos ambas tablas. 
+
+Ahora solo queda unir la dos tablas resultantes para saber la población de las localidades del AI. Para ello, podríamos buscar localidad por localaidad, o, podriamos hacer uso de un left_join(). Para que esta herramient funcione, las dos tablas que queremos unir, deben coincidir en las columnas que identifican a cada observación. Sin embargo, hay muchas observaciones que tienen un nombre igual, pero un municipio diferente, o casos similares. Por lo cual, la manera de identificar a cada observación única es tomando en cuenta todas las columnas de laa base de localidades. Por eso conservamos esas columnas. 
+
+Paraa que nuestro left_join() funcione, los nombres de las variables de las bases deben coincidir, asi que renombramos las columnas de la base de localaidades ai (aunque bien puede ser las variables de la otra base)
+
+```{r}
+localidades_ai <- localidades_ai %>% 
+  rename(ENTIDAD = CVE_ENT, MUN = CVE_MUN, LOC =  CVE_LOC, NOM_LOC = NOMGEO)
+
+head(localidades_ai)
+```
+Una vez hecho esto hacemos una nueva base dodne indique la población total de las localidades del AI. Como nos interesa quedarnos solo con las observaciones de esta base, la "ponemos a la izquerda". Para que resalte, ordanos las observaciones por población
+
+```{r}
+poblacion <- left_join(localidades_ai, localidades_scitel, by = c ("ENTIDAD", "MUN", "LOC", "NOM_LOC")) %>% 
+  arrange(desc(POBTOT))
+
+poblacion
+```
+
+Es importante mencionar que hay ocasiones en las que algunas localaidades no aparecen en la base de SCITEL. Esto se debe a que no tienen población registrada. En este paso, dichas locaaliddes saldran con un NA en la columna de población. 
+
+Y listo, tenemos nuestra tabla con las localidades del AI y su población. Ya solo falta presentar el resultado. 
+
+## Paso 5: Visualizar el resultado. 
+
+Ahora por fin tenemos los insimos que queríamos, a saber, un mapa del Área de Influencia (AI) de nuestro proyecto y una base de datos que nos muestra el nombre y lo población de las localidades que se encuentran en la AI. 
+
+Sin embargo, a pesar de que ya tenemos los datos, quizá debemos integrarlos a un reporte con un formato bien definido. Si bien podemos pegar y copiar los datos al procesador de texto que estemos usndo para hacer el reporte, también tenemos la opción de generar una tabla desde R. 
+
+Para ello, primero elminaremos las observaciones de las localiades para las cuales no hay una población registrada. Si bien, no es nuestro caso, creo conveniente dejar registrado el código con el que podemos lograr esto 
+
+```{r}
+localidades_con_pob <- na.omit(poblacion)
+localidades_con_pob
+```
+Postriormente, como queremos que nuestra tabla muestre la población total de la AI, apalicammos una sumatoria, y agregamos dicha suma como una observación al la base que queremos hacer tabla, es decir a la base de las localidades con población registrada del AI. 
+
+```{r}
+poblacion_total <- sum(localidades_con_pob$POBTOT)
+
+localidades_con_pob <- localidades_con_pob %>% 
+  add_row(
+    !!names(localidades_con_pob)[4] := "Total:",
+    !!names (localidades_con_pob)[5] := poblacion_total
+  )
+
+tail(localidades_con_pob)
+```
+
+Como en las primeras tres columnas salieron NA's los sustituimos estos por espacios en blanco.
+
+```{r}
+localidades_con_pob <- localidades_con_pob %>% 
+  mutate_all(~ifelse(is.na(.), "", .))
+
+tail(localidades_con_pob)
+```
+
+Finalmente hacemos nuestra bonita tabla. Hay muchas herramientas que nos permitirían hacer esto, pero en esta ocación elegiré la libreria kableExtra
+
+```{r}
+library(kableExtra)
+
+tabla <- kable(localidades_con_pob, format = "html") %>% 
+  kable_styling() %>% 
+  row_spec(0, bold = T, background = "#daff33") %>% 
+  row_spec(24, bold = T)
+
+tabla
+```
+
+Y listo, ya tenemos una tabla que podemos utilizar en nuestro reporte. Por su puesto puedes modificar los colores de las columnas, o el tipo de letra, puedes agrerar más columnas y lo que necesites. Pero eso ya es a tu criterio. 
+
+# Conclusiones. 
+
+Hasta este punto hemos cumplido nuestro objetivo, tenemos un mapa que nos indica el Área de Influencia de nustro proyecto, asi como sus diferentes niveles, y tenemos una tabla que nos indica cuales localidades se encuentran en el AI, y su población correspondiente. 
+
+Por su puesto el usuario puede hacer las modificaciones correspondientes, como por ejemplo, modificar los encabezados de las columnas, o que en lugar del código dela entidad aprezca el nombre de la entidad o del municipio. Sin embargo, eso queda para ejercicio del lector. 
+
+
+
+
+

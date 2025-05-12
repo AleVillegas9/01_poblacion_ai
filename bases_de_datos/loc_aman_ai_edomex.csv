@@ -1,0 +1,22 @@
+Name,descriptio,timestamp,begin,end,altitudeMo,tessellate,extrude,visibility,drawOrder,icon,mrb_dist,Name_2,descript_1,timestamp_,begin_2,end_2,altitude_1,tessella_1,extrude_2,visibili_1,drawOrder_,icon_2,CVEGEO,CVE_ENT,CVE_MUN,CVE_LOC,NOMGEO,AMBITO
+Zona de Amortiguamiento,,,,,,"1","0","-1",,,"500",,,,,,,,,,,,"150250010","15","025","0010",San Juan Tezompa,Urbana
+Zona de Amortiguamiento,,,,,,"1","0","-1",,,"500",,,,,,,,,,,,"150250016","15","025","0016",San Mateo Huitzilzingo,Urbana
+Zona de Amortiguamiento,,,,,,"1","0","-1",,,"500",,,,,,,,,,,,"150250020","15","025","0020",Santa Catarina Ayotzingo,Urbana
+Zona de Amortiguamiento,,,,,,"1","0","-1",,,"500",,,,,,,,,,,,"150250058","15","025","0058",Rancho Nuevo San Miguel,Rural
+Zona de Amortiguamiento,,,,,,"1","0","-1",,,"500",,,,,,,,,,,,"150250053","15","025","0053",Rancho San Miguel,Rural
+Área de Influencia Directa,,,,,,"1","0","-1",,,"1000",,,,,,,,,,,,"150250010","15","025","0010",San Juan Tezompa,Urbana
+Área de Influencia Directa,,,,,,"1","0","-1",,,"1000",,,,,,,,,,,,"150250016","15","025","0016",San Mateo Huitzilzingo,Urbana
+Área de Influencia Directa,,,,,,"1","0","-1",,,"1000",,,,,,,,,,,,"150250020","15","025","0020",Santa Catarina Ayotzingo,Urbana
+Área de Influencia Directa,,,,,,"1","0","-1",,,"1000",,,,,,,,,,,,"150250053","15","025","0053",Rancho San Miguel,Rural
+Área de Influencia Directa,,,,,,"1","0","-1",,,"1000",,,,,,,,,,,,"151220006","15","122","0006",El Triángulo,Rural
+Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,,"150250121","15","025","0121",Barrio de Guadalupe,Rural
+Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,,"150250010","15","025","0010",San Juan Tezompa,Urbana
+Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,,"150250011","15","025","0011",San Lorenzo Chimalpa,Urbana
+Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,,"150250016","15","025","0016",San Mateo Huitzilzingo,Urbana
+Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,,"150250019","15","025","0019",San Pablo Atlazalpan,Urbana
+Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,,"150250020","15","025","0020",Santa Catarina Ayotzingo,Urbana
+Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,,"150250080","15","025","0080",Caserío de Cortés,Rural
+Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,,"150250107","15","025","0107",Guadalupana [Granja],Rural
+Área de Influencia Indirecta,,,,,,"1","0","-1",,,"2000",,,,,,,,,,,,"151220006","15","122","0006",El Triángulo,Rural
+Área Núcleo,,,,,,,,,,,,Ciudad Juárez,,,,,,"1","0","-1",,,"150250010","15","025","0010",San Juan Tezompa,Urbana
+Área Núcleo,,,,,,,,,,,,Ciudad Juárez,,,,,,"1","0","-1",,,"150250058","15","025","0058",Rancho Nuevo San Miguel,Rural
