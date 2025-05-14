@@ -3,7 +3,7 @@
 ## Descripción: 
 Supongamos que se tiene georeferenciada polígono de un proyecto. Sin embargo, para evaluar la viabilidad y el imapacto social de dicho proyecto se requiere conocer ¿cuál es el Área de Influencia de dicho proyecto? y ¿ A cuantas personas potencialmente afectaría nuestro proyecto?
 
-✅ Ver el reporte completo 👉 [analisis.html](https://tuusuario.github.io/mi-proyecto/analisis.html)
+✅ Ver el reporte completo 👉 [01. Uso de Qgis y R para conocer la población de una Área de Influencia](https://alevillegas9.github.io/01_poblacion_ai/01.html)
 
 ##  Requisitos e insumos
 - R
