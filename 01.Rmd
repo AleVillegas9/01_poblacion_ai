@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Esta proyecto/demostración está realizado en lenguaje R. Para su construcción se utilizó el entorno de desarrollo R studio y para su presentación en este documento se utilizó el formato R markdown.
+Este proyecto/demostración está realizado en lenguaje R. Para su construcción se utilizó el entorno de desarrollo R studio y para su presentación en este documento se utilizó el formato R markdown.
 
 En el repositorio de Github de este proyecto encontrarás, los insumos y el código y los productos del código aquí explicados. Esto para facilitar su reproductibilidad. [Repositorio Github](https://github.com/AleVillegas9/01_poblacion_ai)
 
