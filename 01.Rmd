@@ -343,4 +343,4 @@ Y listo, ya tenemos una tabla que podemos utilizar en nuestro reporte. Por su pu
 
 Hasta este punto hemos cumplido nuestro objetivo, tenemos un mapa que nos indica el Área de Influencia de nustro proyecto, asi como sus diferentes niveles, y tenemos una tabla que nos indica cuales localidades se encuentran en el AI, y su población correspondiente.
 
-Por su puesto el usuario puede hacer las modificaciones correspondientes, como por ejemplo, modificar los encabezados de las columnas, o que en lugar del código dela entidad aprezca el nombre de la entidad o del municipio, o recuperar más datos de las tablas del SCITEL.  Sin embargo, eso queda para ejercicio del lector.
+Por su puesto el usuario puede hacer las modificaciones correspondientes, como por ejemplo, modificar los encabezados de las columnas, o que en lugar del código dela entidad aprezca el nombre de la entidad o del municipio, o recuperar más datos de las tablas del SCITEL.  Sin embargo, eso queda para ejercicio del lector. :)
