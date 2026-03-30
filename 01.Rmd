@@ -199,7 +199,7 @@ loc_pun_edomex <- loc_pun_edomex [,-5]
 
 ### Paso 3.2: Unificación de las bases de las localidades en el AI
 
-Como felizmente, para todas las bases de las localidade del AI, las columnas y su orden concuerdan, juntamos las cuatro bases de datos.También quitamos la columna de CVEGEO, pues no aporta mucho para este proyecto.
+Feliz y afortunadamente, para todas las bases de las localidades del AI, las columnas y su orden concuerdan, por lo cual, procedemos a  juntar las cuatro bases de datos.También quitamos la columna de CVEGEO, pues no aporta mucho para este proyecto.
 
 ```{r}
 localidades_ai <- rbind(loc_pun_edomex,loc_pun_edomex,loc_aman_cdmx,loc_aman_edomex)
@@ -209,7 +209,7 @@ localidades_ai <- localidades_ai[, -1]
 tail(localidades_ai)
 ```
 
-Todo parece bien, aunque si inspeccionaamos la base nos daremos cuenta de que hay muchas observaciones que se repiten, entonces las quitamos. Lo cual, nos deja con 23 observaciones, o localidades dentro del AI.
+Todo parece bien, aunque si inspeccionamos la base nos daremos cuenta de que hay muchas observaciones que se repiten, entonces las quitamos. Lo cual, nos deja con 23 observaciones, o localidades dentro del AI.
 
 ```{r}
 localidades_ai <-unique(localidades_ai)
@@ -229,9 +229,9 @@ scitel_edomex <- read_csv("C:/Users/javal/OneDrive/Desktop/Portafolio 9/01_Qgis_
 tail(scitel_edomex)
 ```
 
-Vemos que son muchas observaciones, pero también muchas variables. Así que procedemos a limpiar la base para solo quedarnos con las variables que nos interesan, a saber las variales equivalentes a las que tenemos en la base unificada de las localidades de la AI + la variable donde viene la población.
+Vemos que son muchas observaciones, pero también muchas variables. Así que procedemos a limpiar la base para solo quedarnos con las variables que nos interesan, a saber las variables equivalentes a las que tenemos en la base unificada de las localidades de la AI + la variable donde viene la población.
 
-En este punto, notamos que hay otras variables que podrían interesarnos, como el la población de mujeres o por disintos grupos de edad. Si nos interesa, podemos conservar dichas variables. Para fines de este proyecto sólo nos quedaremos con la variable de población total.
+En este punto, notamos que hay otras variables que podrían interesarnos, como el la población de mujeres o por distintos grupos de edad. Si nos interesa, podemos conservar dichas variables. Para fines de este proyecto sólo nos quedaremos con la variable de población total.
 
 
 ```{r}
@@ -262,11 +262,11 @@ head (localidades_scitel)
 
 ## Paso 4: Unimos ambas tablas.
 
-Ahora solo queda unir la dos tablas resultantes para saber la población de las localidades del AI. Para ello, exiten varias opciones, como por ejemplo, buscar manualmente cada una de las localidades. O, podríamos utuluizar la función left_join(), pues nos permite unir dos bases de datos, a partir de una o vatias columnas en común, pero conservando todas las observaciones de una tabla y eliminando las observaciones que no tengn correspondencia de la segunda. En este caso, nos interesa conservar todos los valores de la base de localidades del AI, y eliminar todas las otras observaciones de la tabla unificada del SCITEL. 
+Ahora solo queda unir la dos tablas resultantes para saber la población de las localidades del AI. Para ello, exiten varias opciones, como por ejemplo, buscar manualmente cada una de las localidades. O, podríamos utilizar la función left_join(), pues nos permite unir dos bases de datos, a partir de una o varias columnas en común, pero conservando todas las observaciones de una tabla y eliminando las observaciones que no tengn correspondencia de la segunda. En este caso, nos interesa conservar todos los valores de la base de localidades del AI, y eliminar todas las otras observaciones de la tabla unificada del SCITEL. 
 
 Para que el left_join() funcione, las dos bases que queremos unir, deben coincidir en las columnas que identifican a cada observación. Sin embargo, hay muchas observaciones que tienen un nombre igual, pero un municipio diferente, o casos similares. Por lo cual, la manera de identificar a cada observación única es tomando en cuenta todas las columnas de la base de localidades. Por eso conservamos esas columnas.
 
-Paraa que nuestro left_join() funcione, los nombres de las variables de las bases a unir deben coincidir, asi que renombraremos las columnas de la base de localaidades AI (aunque bien puede ser las variables de la otra base)
+Para que nuestro left_join() funcione, los nombres de las variables de las bases a unir deben coincidir, asi que renombraremos las columnas de la base de localaidades AI (aunque bien puede ser las variables de la otra base)
 
 ```{r}
 localidades_ai <- localidades_ai %>% 
@@ -275,7 +275,7 @@ localidades_ai <- localidades_ai %>%
 head(localidades_ai)
 ```
 
-Una vez hecho esto hacemos una nueva base donde indique la población total de las localidades del AI. Como nos interesa quedarnos solo con las observaciones de esta base, la "ponemos a la izquerda". Para que los resultaos sean más comprensibles ordenamos las observaciones de manera descendente en función de la población que tienen. 
+Una vez hecho esto hacemos una nueva base donde indique la población total de las localidades del AI. Como nos interesa quedarnos solo con las observaciones de esta base, la "ponemos a la izquerda". Para que los resultados sean más comprensibles ordenamos las observaciones de manera descendente en función de la población que tienen. 
 
 ```{r}
 poblacion <- left_join(localidades_ai, localidades_scitel, by = c ("ENTIDAD", "MUN", "LOC", "NOM_LOC")) %>% 
@@ -301,7 +301,7 @@ localidades_con_pob <- na.omit(poblacion)
 localidades_con_pob
 ```
 
-Posteriormente, como queremos que nuestra tabla muestre la población total de la AI, apalicamos una suma, y agregamos dicha suma como una observación a la base que queremos hacer tabla, es decir a la base de las localidades con población registrada del AI.
+Posteriormente, como queremos que nuestra tabla muestre la población total de la AI, aplicamos una suma, y agregamos dicha suma como una observación a la base que queremos hacer tabla, es decir a la base de las localidades con población registrada del AI.
 
 ```{r}
 poblacion_total <- sum(localidades_con_pob$POBTOT)
